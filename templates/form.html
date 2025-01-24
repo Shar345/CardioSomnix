@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioSomnix</title>
+    <meta content="Sleep quality and cardiovascular health are deeply interconnected. Learn how improving sleep can prevent heart diseases." name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/animate/animate.min.css') }}"/>
+    <link href="{{ url_for('static', filename='lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: "Ubuntu", sans-serif;
+            background: linear-gradient(135deg, #a0c4ff, #f0f9ff);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            animation: fadeIn 1s;
+            color: #1b1b1b; /* Dark text for contrast */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #0056b3; /* Blue heading */
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        form {
+            background-color: #ffffff; /* White form background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            animation: zoomIn 0.5s ease-in-out;
+        }
+
+        .question {
+            background-color: #e6f7ff; /* Light blue background for questions */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0; /* Start hidden for animation */
+            animation: fadeInUp 0.5s ease-in-out forwards; /* Animation for questions */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .question:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .question:nth-child(1) { animation-delay: 0.1s; }
+        .question:nth-child(2) { animation-delay: 0.2s; }
+        .question:nth-child(3) { animation-delay: 0.3s; }
+        .question:nth-child(4) { animation-delay: 0.4s; }
+        .question:nth-child(5) { animation-delay: 0.5s; }
+        .question:nth-child(6) { animation-delay: 0.6s; }
+        .question:nth-child(7) { animation-delay: 0.7s; }
+        .question:nth-child(8) { animation-delay: 0.8s; }
+        .question:nth-child(9) { animation-delay: 0.9s; }
+        .question:nth-child(10) { animation-delay: 1s; }
+        .question:nth-child(11) { animation-delay: 1.1s; }
+        .question:nth-child(12) { animation-delay: 1.2s; }
+        .question:nth-child(13) { animation-delay: 1.3s; }
+        .question:nth-child(14) { animation-delay: 1.4s; }
+        .question:nth-child(15) { animation-delay: 1.5s; }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600; /* Bold for emphasis */
+            font-size: 18px;
+            color: #0056b3; /* Blue labels */
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #0056b3; /* Blue accent */
+            transform: scale(1.2); /* Increased size for better visibility */
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9; /* Light input background */
+            color: #333; /* Dark text for inputs */
+        }
+
+        input[type="number"]:focus, select:focus {
+            border-color: #0056b3; /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+            outline: none;
+        }
+
+        /* Submit Button */
+        input[type="submit"] {
+            width: 100%;
+            background-color: #0056b3; /* Blue button */
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600; /* Bold button text */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px; /* Increased margin for spacing */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #004494; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly increase size on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px; /* Slightly smaller font for mobile */
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+            }
+
+            label {
+                font-size: 16px; /* Smaller label font on mobile */
+            }
+
+            .question {
+                margin-bottom: 15px; /* Reduced margin for mobile */
+            }
+
+            input[type="number"], select {
+                padding: 10px; /* Adjust padding for mobile */
+            }
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .bmi44 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left:-20px;
+        }
+        #bmi:hover{
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <form id="sleepCvdForm" method="POST" action= \submit>
+        <h1 class="text-primary mb-0" style="margin-left: -50px;"><i class="fas fa-heartbeat me-2"></i>CardioSomnix</h1><br>
+        <div class="bmi44 text-center">
+            <h5>Your Health Matters: Check Your BMI for Accurate Results Before Starting!!!</h5>
+            <a href="{{ url_for('bmi1') }}" class="btn btn-primary py-2 px-4 ms-3 flex-shrink-0" style="border-radius: 10px;" id="bmi">BMI Calculator</a><br><br>
+        </div>
+        <div class="question">
+            <label>1. Have you been diagnosed with any cardiovascular disease?</label>
+            <input type="radio" name="cvd_diagnosed" value="yes" required>Yes
+            <input type="radio" name="cvd_diagnosed" value="no" required style="margin-left:10px">No
+        </div>
+
+        <div class="question">
+            <label>2. What is your age?</label>
+            <input type="number" name="age" required min="18" max="120">
+        </div>
+
+        <div class="question">
+            <label>3. What is your gender?</label>
+            <select name="gender" required>
+                <option value="">Select</option>
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <label>4. On average, how many hours of sleep do you get per night?</label>
+            <input type="number" name="sleep_hours" required min="0" max="24" step="0.5">
+        </div>
+
+        <div class="question">
+            <label>5. How would you rate your overall sleep quality?</label>
+            <select name="sleep_quality" required>
+                <option value="">Select</option>
+                <option value="1">Very Poor</option>
+                <option value="2">Poor</option>
+                <option value="3">Fair</option>
+                <option value="4">Good</option>
+                <option value="5">Very Good</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <label>6. Do you have trouble falling asleep or staying asleep?</label>
+            <input type="radio" name="insomnia" value="yes" required> Yes
+            <input type="radio" name="insomnia" value="no" required style="margin-left:10px"> No
+        </div>
+
+        <div class="question">
+            <label>7. Have you been diagnosed with sleep apnea?</label>
+            <input type="radio" name="sleep_apnea" value="yes" required> Yes
+            <input type="radio" name="sleep_apnea" value="no" required style="margin-left:10px"> No
+        </div>
+
+        <div class="question">
+            <label>8. Do you snore loudly?</label>
+            <input type="radio" name="snoring" value="yes" required> Yes
+            <input type="radio" name="snoring" value="no" required style="margin-left:10px"> No
+            <input type="radio" name="snoring" value="unsure" required style="margin-left:10px"> Unsure
+        </div>
+
+        <div class="question">
+            <label>9. Do you often feel excessively sleepy during the day?</label>
+            <input type="radio" name="daytime_sleepiness" value="yes" required> Yes
+            <input type="radio" name="daytime_sleepiness" value="no" required style="margin-left:10px"> No
+        </div>
+
+        <div class="question">
+            <label>10. What is your current smoking status?</label>
+            <select name="smoking_status" required>
+                <option value="">Select</option>
+                <option value="never">Never smoked</option>
+                <option value="former">Former smoker</option>
+                <option value="current">Current smoker</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <label>11. How often do you engage in moderate to vigorous physical activity?</label>
+            <select name="physical_activity" required>
+                <option value="">Select</option>
+                <option value="0">Never</option>
+                <option value="1">1-2 times per month</option>
+                <option value="2">1-2 times per week</option>
+                <option value="3">3-4 times per week</option>
+                <option value="4">5 or more times per week</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <label>12. What is your body mass index (BMI)?</label>
+            <input type="number" name="bmi" step="0.1" min="10" max="50" required>
+        </div>
+
+        <div class="question">
+            <label>13. Do you have high blood pressure (hypertension)?</label>
+            <input type="radio" name="hypertension" value="yes" required> Yes
+            <input type="radio" name="hypertension" value="no" required style="margin-left:10px"> No
+            <input type="radio" name="hypertension" value="unsure" required style="margin-left:10px"> Unsure
+        </div>
+
+        <div class="question">
+            <label>14. Do you have diabetes?</label>
+            <input type="radio" name="diabetes" value="yes" required> Yes
+            <input type="radio" name="diabetes" value="no" required style="margin-left:10px"> No
+            <input type="radio" name="diabetes" value="unsure" required style="margin-left:10px"> Unsure
+        </div>
+
+        <div class="question">
+            <label>15. On a scale of 1-10, how would you rate your overall stress level? (1 being very low, 10 being very high)</label>
+            <input type="number" name="stress_level" required min="1" max="10">
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

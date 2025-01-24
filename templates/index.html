@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioSomnix</title>
+    <meta content="Sleep quality and cardiovascular health are deeply interconnected. Learn how improving sleep can prevent heart diseases." name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/animate/animate.min.css') }}"/>
+    <link href="{{ url_for('static', filename='lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+        <style>
+            body{
+                font-family: "Ubuntu", sans-serif;
+            }
+            html{
+                scroll-behavior: smooth;
+                scroll-padding: 4.5rem;
+            }
+            .cont{
+                width:500px;
+                height:281px;
+            }
+            .cvd {
+                font-family: "Ubuntu", sans-serif;
+                background-color: #f7f9fc;
+                color: #333;
+                margin: 0;
+                padding: 20px;
+                transition: background-color 0.5s;
+                max-width: 800px;
+                margin: auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                transition: transform 0.5s;
+            }
+            .cvd .header {
+                text-align: center;
+                color: #007BFF;
+                margin-bottom: 20px;
+                font-size: 2.5em;
+                transition: color 0.5s;
+            }
+            .cvd .row {
+                display: flex;
+                flex-direction: row;
+                background: #ffffff;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                overflow: hidden;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+            .cvd .row:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            }
+            .cvd .col-left {
+                flex: 1;
+                padding: 20px;
+                background-color: #e7f3fe;
+                border-right: 1px solid #e0e0e0;
+                position: relative;
+                transition: background-color 0.3s;
+            }
+            .cvd .col-right {
+                flex: 1;
+                padding: 20px;
+                text-align: center;
+                background-color: #f7f9fc;
+            }
+            .cvd h3 {
+                margin: 0 0 10px;
+                color: #003366;
+                font-size: 1.5em;
+                text-transform: uppercase;
+                transition: transform 0.3s;
+            }
+            .cvd h3:hover {
+                transform: scale(1.05);
+            }
+            .cvd button.accordion {
+                background-color: #007BFF;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+                font-size: 1em;
+                margin-top: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .cvd button.accordion:hover {
+                background-color: #0056b3;
+                transform: scale(1.05) rotate(1deg);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+     
+            /* Modal Styles */
+            .cvd .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.6);
+                padding-top: 60px;
+                animation: fadeIn 0.5s;
+            }
+            .cvd .modal-content {
+                background-color: #ffffff;
+                margin: 5% auto;
+                padding: 30px;
+                border: 1px solid #007BFF;
+                width: 90%;
+                max-width: 600px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                position: relative;
+                animation: slideDown 0.5s;
+            }
+            .cvd .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                transition: color 0.3s;
+            }
+            .cvd .close:hover,
+            .close:focus {
+                color: #007BFF;
+                text-decoration: none;
+                cursor: pointer;
+            }
+     
+            /* Light Theme for Risk Factors and Prevention */
+            .cvd .risk-factors, .prevention {
+                background-color: #f0f8ff; /* Light background */
+                padding: 15px;
+                border-radius: 5px;
+                margin-top: 10px;
+                border-left: 4px solid #007BFF;
+            }
+            .cvd strong {
+                color: #003366;
+            }
+     
+            /* Animations */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideDown {
+                from { transform: translateY(-30px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+     
+            /* Responsive Styles */
+            @media (max-width: 900px) {
+                .row {
+                    flex-direction: column;
+                }
+                .col-left, .col-right {
+                    border-right: none;
+                    border-bottom: 1px solid #e0e0e0;
+                }
+            }
+            @media (max-width: 600px) {
+                .header {
+                    font-size: 2em;
+                }
+                h3 {
+                    font-size: 1.25em;
+                }
+                button.accordion {
+                    padding: 8px;
+                    font-size: 0.9em;
+                }
+                .modal-content {
+                    padding: 20px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Navbar & Hero Start -->
+<div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+    <div class="container">
+        <div class="container-fluid topbar px-0 px-lg-4 bg-light py-2 d-none d-lg-block" style="margin-bottom: -10px;">
+            <marquee width="100%" direction="left" behavior="scroll" scrollamount="4">
+                <div>
+                    <a href="#" style="color: black; font-family:cursive">Unlock the hidden links between your sleep patterns and heart health with CARDIOSOMNIX, your guide to a healthier life......  Call to Our Experts: +91 93456 67890</a>
+                </div>
+            </marquee>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="#" class="navbar-brand p-0">
+                <h1 class="text-primary mb-0" style="margin-left: -50px;"><i class="fas fa-heartbeat me-2"></i>CardioSomnix</h1>
+                <!-- <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: 30px;">
+                <div class="navbar-nav mx-0 mx-lg-auto">
+                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a href="#aa" class="nav-item nav-link">Facts</a>
+                    <a href="#bb" class="nav-item nav-link">About</a>
+                    <a href="#cc" class="nav-item nav-link">Chronotypes</a>
+                    <a href="#ii" class="nav-item nav-link">CVD</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-bs-toggle="dropdown">
+                            <span class="dropdown-toggle">Pages</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#dd" class="dropdown-item">FAQs</a>
+                            <a href="#ee" class="dropdown-item">Blog</a>
+                            <a href="#ff" class="dropdown-item">Our Experts</a>
+                            <a href="#gg" class="dropdown-item">Video Section</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">CareLocator</a>
+                    <div class="nav-btn px-3">
+                        <a href="{{ url_for('form') }}" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">Take A Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-xl-flex flex-shrink-0 ps-4">
+                <div class="nav-btn px-3">
+                    <a href="{{ url_for('bmi1') }}" class="btn btn-primary py-2 px-4 ms-3 flex-shrink-0" style="border-radius: 10px;">BMI Calculator</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar & Hero End -->
+
+
+<!-- Carousel Start -->
+<div class="header-carousel owl-carousel">
+    <div class="header-carousel-item bg-primary">
+        <div class="carousel-caption">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7 animated fadeInLeft">
+                        <div class="text-sm-center text-md-start">
+                            <h4 class="text-white text-uppercase fw-bold mb-4">Welcome To Sleep & Heart Health</h4>
+                            <h1 class="display-1 text-white mb-4">Better Sleep, Healthier Heart</h1>
+                            <p class="mb-5 fs-5">Improve your sleep patterns today for a stronger, healthier heart tomorrow and beyond.</p>
+                            <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="https://youtu.be/XDfNLw1W6FA?si=vMtKxqicB0x-lAMb"><i class="fas fa-play-circle me-2"></i> Watch Video</a>
+                                <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2" href="https://en.wikipedia.org/wiki/Cardiovascular_disease">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 animated fadeInRight">
+                        <div class="carousel-img" style="object-fit: cover;">
+                            <img src="{{ url_for('static', filename='img/wall1.gif') }}" class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-carousel-item bg-primary">
+        <div class="carousel-caption">
+            <div class="container">
+                <div class="row gy-4 gy-lg-0 gx-0 gx-lg-5 align-items-center">
+                    <div class="col-lg-5 animated fadeInLeft">
+                        <div class="carousel-img">
+                            <img src="{{ url_for('static', filename='img/wall4 doc.gif') }}" class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 animated fadeInRight">
+                        <div class="text-sm-center text-md-end">
+                            <h4 class="text-white text-uppercase fw-bold mb-4">Welcome To Sleep & Heart Health</h4>
+                            <h1 class="display-1 text-white mb-4" style="font-size: 70px;">Transforming Sleep Data into Life-Saving Insights</h1>
+                            <p class="mb-5 fs-5">Rest deeply each night and give your heart the care and protection it deserves</p>
+                            <div class="d-flex justify-content-center justify-content-md-end flex-shrink-0 mb-4">
+                                <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="https://youtu.be/qJq5hA4pnOk?feature=shared"><i class="fas fa-play-circle me-2"></i> Watch Video</a>
+                                <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2" href="https://personality-psychology.com/personality-and-sleep-chronotypes/">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+<!-- Feature Start -->
+<div class="container-fluid feature bg-light py-5" id="aa">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Facts You Should Know</h4>
+            <h1 class="display-4 mb-4">How Sleep Impacts the World</h1>
+            <p class="mb-0">Ticking Time Bomb: How Your Sleep Chronotype Could Be Secretly Destroying Your Heart Health</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="feature-item p-4 pt-0">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-brain me-2" style="font-size: 50px;"></i>
+                    </div>
+                    <h4 class="mb-4">Technology Use and Sleep</h4>
+                    <p class="mb-4">India has one of the highest rates of technology use before bed, with over 60% of Indians using mobile devices late at night. This contributes to poor sleep quality, elevating the risk of cardiovascular disease, a problem also seen globally.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://med.uth.edu/psychiatry/2023/02/21/influence-of-technology-on-sleep-among-young-children/">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="feature-item p-4 pt-0">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-notes-medical me-2" style="font-size: 50px;"></i>
+                    </div>
+                    <h4 class="mb-4">India and Sleep Deprivation</h4>
+                    <p class="mb-4">Compared to global averages, India ranks among the top countries with sleep deprivation issues. Studies indicate that 55% of Indians report not getting enough sleep, which increases the risk of cardiovascular diseases like hypertension and stroke.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://www.ijsm.in/abstractArticleContentBrowse/IJSM/16708/JPJ/fullText">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="feature-item p-4 pt-0">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-cloud-moon me-2" style="font-size: 50px;"></i>
+                    </div>
+                    <h4 class="mb-4">Cardiovascular Mortality Rates</h4>
+                    <p class="mb-4">India accounts for 20% of global cardiovascular deaths, with rising sleep disorders such as sleep apnea and insomnia. Increasing stress, urbanization, and lifestyle changes contribute to these disorders, significantly raising the risk of heart failure and arrhythmias.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://world-heart-federation.org/news/deaths-from-cardiovascular-disease-surged-60-globally-over-the-last-30-years-report/">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="feature-item p-4 pt-0">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-clock me-2" style="font-size: 50px;"></i>
+                    </div>
+                    <h4 class="mb-4">India vs. Developed Countries</h4>
+                    <p class="mb-4">Indians, on average, sleep about 7.1 hours per night, slightly less than people in developed countries such as the U.S. or the U.K., where average sleep is closer to 7.5 hours. This sleep deficit raises the risk of heart-related conditions, especially in urban areas.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://www.ahajournals.org/doi/full/10.1161/circulationaha.114.008729#:~:text=With%20the%20turn%20of%20the%20century%2C%20cardiovascular%20diseases,include%20biological%20mechanisms%2C%20social%20determinants%2C%20and%20their%20interactions">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+
+<!-- About Start -->
+<div class="container-fluid bg-light about pb-5" id="bb">
+    <div class="container pb-5">
+        <div class="row g-5">
+            <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="about-item-content bg-white rounded p-5 h-100">
+                    <h4 class="text-primary">Share Your Voice</h4>
+                    <h1 class="display-4 mb-4">Take the First Step Towards a Healthier Heart!</h1>
+                    <p>This questionnaire is designed to assess your risk of developing cardiovascular disease. Your responses will help us provide you with personalized recommendations to reduce your risk and promote a healthier lifestyle.</p>
+
+                    <p>Please answer the questions honestly and to the best of your ability.</p>
+                    <ul class="text-dark mb-4">
+                        <li><i class="fa fa-check text-primary me-3"></i>This questionnaire is confidential and anonymous.</li>
+                        <li><i class="fa fa-check text-primary me-3"></i>It should only take about 5-7 minutes to complete.</li>
+                        <li><i class="fa fa-check text-primary me-3"></i>Your responses will not be used for any medical diagnosis or treatment.</li>
+                    </ul>
+                    <p>By taking this questionnaire, you'll be taking the first step towards understanding your cardiovascular health and making informed decisions about your well-being.</p>
+                    <h4>Are you ready to get started?</h4><br>
+                    <a class="btn btn-primary rounded-pill py-3 px-5" href="{{ url_for('form') }}">Take a Test</a>
+                </div>
+            </div>
+            <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+                <div class="bg-white rounded p-5 h-100">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-12">
+                            <div class="rounded bg-light">
+                                <img src="{{ url_for('static', filename='img/about-1.png') }}" class="img-fluid rounded w-100" alt="About Us">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="counter-item bg-light rounded p-3 h-100">
+                                <div class="counter-counting">
+                                    <span class="text-primary fs-2 fw-bold" data-toggle="counter-up">12.8</span>
+                                    <span class="h1 fw-bold text-primary" style="font-size: 30px;">M+</span>
+                                </div>
+                                <h4 class="mb-0 text-dark">USA</h4>
+                                <p class="mb-0 text-muted">Cardiovascular disease cases linked to poor sleep quality</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="counter-item bg-light rounded p-3 h-100">
+                                <div class="counter-counting">
+                                    <span class="text-primary fs-2 fw-bold" data-toggle="counter-up">7.4</span>
+                                    <span class="h1 fw-bold text-primary" style="font-size: 30px;">M+</span>
+                                </div>
+                                <h4 class="mb-0 text-dark">UK</h4>
+                                <p class="mb-0 text-muted">Cardiovascular disease cases with sleep disturbances</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="counter-item bg-light rounded p-3 h-100">
+                                <div class="counter-counting">
+                                    <span class="text-primary fs-2 fw-bold" data-toggle="counter-up">9.7</span>
+                                    <span class="h1 fw-bold text-primary" style="font-size: 30px;">M+</span>
+                                </div>
+                                <h4 class="mb-0 text-dark">Japan</h4>
+                                <p class="mb-0 text-muted">Cardiovascular disease cases due to sleep deprivation</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="counter-item bg-light rounded p-3 h-100">
+                                <div class="counter-counting">
+                                    <span class="text-primary fs-2 fw-bold" data-toggle="counter-up">15.9</span>
+                                    <span class="h1 fw-bold text-primary" style="font-size: 30px;">M+</span>
+                                </div>
+                                <h4 class="mb-0 text-dark">India</h4>
+                                <p class="mb-0 text-muted">Cardiovascular disease cases linked to insufficient sleep</p>
+                            </div>
+                        </div>                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<!-- Chronotypes Start -->
+<div class="container-fluid service py-5" id="cc">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Sleep Chronotypes</h4>
+            <h1 class="display-4 mb-4">Discover Your Animal Sleep Chronotype</h1>
+            <p class="mb-0">Based on your sleep patterns, you can be categorized into specific sleep chronotypes represented by animals. Find out which animal reflects your sleep habits and how to optimize your daily routine.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="{{ url_for('static', filename='img/bear.jpg') }}" class="img-fluid rounded-top w-100" alt="">
+                        <div class="service-icon p-3">
+                            <i class="fa fa-lion fa-2x">🐻</i>
+                        </div>
+                    </div>
+                    <div class="service-content p-4">
+                        <div class="service-content-inner">
+                            <a href="#" class="d-inline-block h4 mb-4">Bear Chronotype</a>
+                            <p class="mb-4"><b>Characteristics:</b> Sleep aligns with the sun, productive mid-day, generally needs 8 hours of sleep.</p>
+                            <p class="mb-4"><b>Cardiovascular Risks:</b> Moderate risk; generally balanced sleep but prolonged stress or inconsistent patterns may increase risk.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4" href="https://personality-psychology.com/personality-and-sleep-chronotypes/">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="{{ url_for('static', filename='img/lion.jpg') }}" class="img-fluid rounded-top w-100" alt="">
+                        <div class="service-icon p-3">
+                            <i class="fa fa-lion fa-2x">🦁</i>
+                        </div>
+                    </div>
+                    <div class="service-content p-4">
+                        <div class="service-content-inner">
+                            <a href="#" class="d-inline-block h4 mb-4">Lion Chronotype</a>
+                            <p class="mb-4"><b>Characteristics:</b> Early riser, productive in morning, winds down early, consistent sleep routine.</p>
+                            <p class="mb-4"><b>Cardiovascular Risks:</b> Lower risk due to regular sleep patterns, active lifestyle, and morning exercise.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4" href="https://personality-psychology.com/personality-and-sleep-chronotypes/">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="{{ url_for('static', filename='img/wolf.jpg') }}" class="img-fluid rounded-top w-100" alt="">
+                        <div class="service-icon p-3">
+                            <i class="fa fa-lion fa-2x">🐺</i>
+                        </div>
+                    </div>
+                    <div class="service-content p-4">
+                        <div class="service-content-inner">
+                            <a href="#" class="d-inline-block h4 mb-4">Wolf Chronotype</a>
+                            <p class="mb-4"><b>Characteristics:</b> Night-oriented, energetic in late afternoon /evening, struggles with mornings.</p>
+                            <p class="mb-4"><b>Cardiovascular Risks:</b> Higher risk due to irregular sleep, late-night eating, low daytime activity, and increased blood pressure.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4" href="https://personality-psychology.com/personality-and-sleep-chronotypes/">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="{{ url_for('static', filename='img/dolphin.jpg') }}" class="img-fluid rounded-top w-100" alt="" style="height: 305px;border-radius:20px">
+                        <div class="service-icon p-3">
+                            <i class="fa fa-lion fa-2x">🐬</i>
+                        </div>
+                    </div>
+                    <div class="service-content p-4">
+                        <div class="service-content-inner">
+                            <a href="#" class="d-inline-block h4 mb-4">Dolphin Chronotype</a>
+                            <p class="mb-4"><b>Characteristics:</b> Light sleeper, irregular sleep patterns, anxious, frequently wakes during the night.</p>
+                            <p class="mb-4"><b>Cardiovascular Risks:</b> Higher risk due to poor sleep quality, chronic sleep deprivation, and stress leading to hypertension.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4" href="https://personality-psychology.com/personality-and-sleep-chronotypes/">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+<!-- Chronotypes End -->
+
+<!-- CVD Start -->
+<div class="container-fluid service py-5" id="ii">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Cardiovascular Health</h4>
+            <h1 class="display-4 mb-4">Understand Your Cardiovascular Disease Risk</h1>
+            <p class="mb-0">Based on your lifestyle and health habits, you may be at risk for certain cardiovascular diseases. Learn about common cardiovascular conditions, their symptoms, and how to improve your heart health through prevention and management strategies.</p>   
+        </div>
+        <div class="cvd">
+            <h2 class="header">Cardiovascular Health Information</h2>
+            <div class="row">
+                <div class="col-left">
+                    <h3>Hypertension</h3>
+                    <p><strong>Symptoms:</strong> Headaches, chest pain, blurred vision.</p>
+                </div>
+                <div class="col-right">
+                    <button class="accordion" onclick="openModal('hypertensionModal')">Expand for Details</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-left">
+                    <h3>Sleep Apnea</h3>
+                    <p><strong>Symptoms:</strong> Loud snoring, daytime drowsiness, insomnia.</p>
+                </div>
+                <div class="col-right">
+                    <button class="accordion" onclick="openModal('sleepApneaModal')">Expand for Details</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-left">
+                    <h3>Coronary Artery Disease</h3>
+                    <p><strong>Symptoms:</strong> Chest pain, shortness of breath, fatigue.</p>
+                </div>
+                <div class="col-right">
+                    <button class="accordion" onclick="openModal('cadModal')">Expand for Details</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-left">
+                    <h3>Peripheral Artery Disease</h3>
+                    <p><strong>Symptoms:</strong> Leg pain, numbness, cold feet.</p>
+                </div>
+                <div class="col-right">
+                    <button class="accordion" onclick="openModal('padModal')">Expand for Details</button>
+                </div>
+            </div>
+
+            <!-- Modals -->
+            <div id="hypertensionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('hypertensionModal')">&times;</span>
+                    <h3>Hypertension</h3>
+                    <div class="risk-factors">
+                        <strong>Risk Factors:</strong>
+                        <p>Poor sleep, stress, unhealthy diet.</p>
+                    </div>
+                    <div class="prevention">
+                        <strong>Prevention:</strong>
+                        <p>Balanced diet, exercise, good sleep hygiene.</p>
+                    </div><br>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://www.mayoclinic.org/diseases-conditions/high-blood-pressure/symptoms-causes/syc-20373410">Discover More</a>
+                </div>
+            </div>
+            <div id="sleepApneaModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('sleepApneaModal')">&times;</span>
+                    <h3>Sleep Apnea</h3>
+                    <div class="risk-factors">
+                        <strong>Risk Factors:</strong>
+                        <p>Obesity, smoking, high blood pressure.</p>
+                    </div>
+                    <div class="prevention">
+                        <strong>Prevention:</strong>
+                        <p>Weight management, better sleep habits.</p>
+                    </div><br>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://www.mayoclinic.org/diseases-conditions/sleep-apnea/symptoms-causes/syc-20377631#:~:text=Overview,you%20might%20have%20sleep%20apnea.">Discover More</a>
+                </div>
+            </div>
+            <div id="cadModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('cadModal')">&times;</span>
+                    <h3>Coronary Artery Disease</h3>
+                    <div class="risk-factors">
+                        <strong>Risk Factors:</strong>
+                        <p>High cholesterol, smoking, diabetes.</p>
+                    </div>
+                    <div class="prevention">
+                        <strong>Prevention:</strong>
+                        <p>Healthy diet, regular exercise, regular check-ups.</p>
+                    </div><br>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://www.mayoclinic.org/diseases-conditions/coronary-artery-disease/symptoms-causes/syc-20350613">Discover More</a>
+                </div>
+            </div>
+            <div id="padModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('padModal')">&times;</span>
+                    <h3>Peripheral Artery Disease</h3>
+                    <div class="risk-factors">
+                        <strong>Risk Factors:</strong>
+                        <p>Smoking, high cholesterol, diabetes.</p>
+                    </div>
+                    <div class="prevention">
+                        <strong>Prevention:</strong>
+                        <p>Quitting smoking, regular exercise, healthy diet.</p>
+                    </div><br>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="https://www.mayoclinic.org/diseases-conditions/peripheral-artery-disease/symptoms-causes/syc-20350557">Discover More</a>
+                </div>
+            </div>
+            <script>
+                function openModal(modalId) {
+                    document.getElementById(modalId).style.display = "block";
+                }
+                function closeModal(modalId) {
+                    document.getElementById(modalId).style.display = "none";
+                }
+         
+                // Close modal when clicking outside of the modal
+                window.onclick = function(event) {
+                    const modals = document.getElementsByClassName('modal');
+                    for (let modal of modals) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<!-- CVD End -->
+
+<!-- FAQs Start -->
+<div class="container-fluid faq-section bg-light py-5" id="dd">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="h-100">
+                    <div class="mb-5">
+                        <h4 class="text-primary">Some Important FAQ's</h4>
+                        <h1 class="display-4 mb-0">Common Frequently Asked Questions</h1>
+                    </div>
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Q: What are the warning signs of sleep-related cardiovascular issues?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show active" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body rounded">
+                                    A: Common warning signs include frequent snoring, gasping for air during sleep (as in sleep apnea), waking up feeling tired even after a full night’s sleep, unexplained fatigue, frequent headaches in the morning, and nighttime chest discomfort. These symptoms may indicate underlying cardiovascular problems and should be evaluated by a healthcare provider.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Q: How does sleep duration affect the risk of cardiovascular diseases?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    A: Both insufficient sleep (less than 6 hours) and excessive sleep (more than 9 hours) are linked to an increased risk of cardiovascular diseases such as heart attacks, strokes, and hypertension. Proper sleep duration, ideally between 7-8 hours, is crucial for maintaining heart health.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Q: How does sleep deprivation affect heart function and overall cardiovascular health?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    A: Chronic sleep deprivation leads to increased stress hormones, higher inflammation levels, and impaired blood vessel function. These factors contribute to the development of heart disease by raising blood pressure, cholesterol levels, and promoting the hardening of arteries (atherosclerosis).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Q: Can improving sleep habits help lower the risk of cardiovascular disease, even in people with a family history of heart issues?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    A: Absolutely. Even individuals with a genetic predisposition to heart disease can reduce their cardiovascular risk by adopting healthier sleep habits. This includes maintaining a consistent sleep schedule, improving sleep quality, and treating underlying sleep disorders, such as sleep apnea.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.4s">
+                <img src="{{ url_for('static', filename='img/wall3 boy.gif') }}" alt="Logo">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQs End -->
+
+<!-- Blog Start -->
+<div class="container-fluid blog py-5" id="ee">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">From Blog</h4>
+            <h1 class="display-4 mb-4">Sleep & Cardiovascular Health News</h1>
+            <p class="mb-0">Stay informed on the latest research and tips for improving your sleep and cardiovascular health. Learn how your habits and natural rhythms impact your heart and overall well-being.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="{{ url_for('static', filename='img/blog1.gif') }}" class="img-fluid rounded-top w-100" alt="">
+                        <div class="blog-categiry py-2 px-4">
+                            <span>Business</span>
+                        </div>
+                    </div>
+                    <div class="blog-content p-4">
+                        <div class="blog-comment d-flex justify-content-between mb-3">
+                            <div class="small"><span class="fa fa-user text-primary"></span> Cynthia Vinney</div>
+                            <div class="small"><span class="fa fa-calendar text-primary"></span> 01 Mar 2023 </div>
+                            <div class="small"><span class="fa fa-comment-alt text-primary"></span> 120 Comments</div>
+                        </div>
+                        <a href="https://www.verywellmind.com/chronotypes-and-their-effect-on-sleep-6950897" class="h4 d-inline-block mb-3">How Your Chronotype Affects Your Quality of Sleep</a>
+                        <p class="mb-3">If you’ve ever referred to yourself as a “morning person” or a “night person,” you were referencing your chronotype. It is a natural individual difference that can have a big impact on how much and how well you sleep, especially if you have a job or other obligations that adhere to a schedule that doesn't work with your chronotype.</p>
+                        <a href="https://www.verywellmind.com/chronotypes-and-their-effect-on-sleep-6950897" class="btn p-0">Read More  <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="{{ url_for('static', filename='img/blog2.gif') }}"  class="img-fluid rounded-top w-100" alt="">
+                        <div class="blog-categiry py-2 px-4">
+                            <span>Business</span>
+                        </div>
+                    </div>
+                    <div class="blog-content p-4">
+                        <div class="blog-comment d-flex justify-content-between mb-3">
+                            <div class="small"><span class="fa fa-user text-primary"></span> Tiffany Ayuda</div>
+                            <div class="small"><span class="fa fa-calendar text-primary"></span> 21 Aug 2024</div>
+                            <div class="small"><span class="fa fa-comment-alt text-primary"></span> 102 Comments</div>
+                        </div>
+                        <a href="https://www.parsleyhealth.com/blog/what-your-sleep-chronotype-means/" class="h4 d-inline-block mb-3">My Journey with Cardiovascular Health: The Suprising Impact of Sleep Chronotype</a>
+                        <p class="mb-3">If you’ve ever wondered why you can pop out of bed at the crack of dawn with no issue while your partner or friend prefers to sleep until mid-morning, science has a reason. Meet your sleep chronotype.Sleep chronotypes are people's natural proclivity for when they go to sleep and wake up. You've likely heard of the proverbial phrases "morning lark" and "night owl." But these categories don't fit everyone.</p>
+                        <a href="https://www.parsleyhealth.com/blog/what-your-sleep-chronotype-means/" class="btn p-0">Read More  <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="{{ url_for('static', filename='img/blog3.gif') }}"  class="img-fluid rounded-top w-100" alt="" style="height: 420px;">
+                        <div class="blog-categiry py-2 px-4">
+                            <span>Business</span>
+                        </div>
+                    </div>
+                    <div class="blog-content p-4">
+                        <div class="blog-comment d-flex justify-content-between mb-3">
+                            <div class="small"><span class="fa fa-user text-primary"></span> Caitlin Carlson</div>
+                            <div class="small"><span class="fa fa-calendar text-primary"></span> 12 Oct 2023</div>
+                            <div class="small"><span class="fa fa-comment-alt text-primary"></span> 70 Comments</div>
+                        </div>
+                        <a href="https://www.womenshealthmag.com/health/a45378867/sleep-chronotypes/" class="h4 d-inline-block mb-3">Knowing Your Sleep Chronotype Can Help You Improve Sleep, Boost Productivity</a>
+                        <p class="mb-3">Whether you’re listening to a news podcast debating the merits of changing school start times or consuming IG content from an expert urging the government to end daylight savings time, you’re likely to hear the term circadian rhythm referenced often. Those are two real-life topics of debate that show how many sleep doctors are united in legislating for change that allows people to live in harmony with their natural sleep predispositions, or “sleep chronotype.”</p>
+                        <a href="https://www.womenshealthmag.com/health/a45378867/sleep-chronotypes/" class="btn p-0">Read More  <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+<!-- Team Start -->
+<div class="container-fluid team pb-5" id="ff">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Influencers</h4>
+            <h1 class="display-4 mb-4">Meet Our Expert Researchers</h1>
+            <p class="mb-0">These renowned doctors have significantly contributed to understanding the effects of sleep on cardiovascular health through groundbreaking research and studies.</p>
+        </div>
+        <div class="row g-4">
+            <!-- Doctor 1 -->
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{{ url_for('static', filename='img/Doc1.jpg') }}" class="img-fluid rounded-top w-100" alt="Dr. Matthew Walker" Style="height:300px">
+                        <div class="team-icon">
+                            <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="https://academic.oup.com/sleep/article/36/9/1307/2577899"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-title p-4">
+                        <h4 class="mb-0">Dr. Matthew Walker</h4>
+                        <p class="mb-0">Neuroscientist & Sleep Expert</p>
+                        <p class="small">Author of "Why We Sleep", Dr. Walker's research focuses on the impact of sleep on human health and performance. 
+                        <a class="btn btn-info rounded-pill py-2 px-4" style="margin-top:20px;" href="https://youtu.be/5MuIMqhT8DM?feature=shared">Play Content</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Doctor 2 -->
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{{ url_for('static', filename='img/Doc2.jpg') }}" class="img-fluid rounded-top w-100" alt="Dr. Virend Somers" Style="height:300px">
+                        <div class="team-icon">
+                            <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000000988"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-title p-4">
+                        <h4 class="mb-0">Dr. Virend Somers</h4>
+                        <p class="mb-0">Cardiologist & Sleep Researcher</p>
+                        <p class="small">Dr. Somers has contributed extensively to our understanding of how sleep apnea affects cardiovascular health. 
+                        <a class="btn btn-info rounded-pill py-2 px-4" style="margin-top:20px;" href="https://youtu.be/oHlnQ4EX02A?feature=shared" >Play Content</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Doctor 3 -->
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{{ url_for('static', filename='img/Doc3.jpg') }}" class="img-fluid rounded-top w-100" alt="Dr. Steven Shea" Style="height:300px">
+                        <div class="team-icon">
+                            <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6686856/"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-title p-4">
+                        <h4 class="mb-0">Dr. Steven Shea</h4>
+                        <p class="mb-0">Circadian Rhythm Expert</p>
+                        <p class="small">Dr. Shea's research focuses on the role of circadian rhythms in cardiovascular disease.<br> 
+                        <a class="btn btn-info rounded-pill py-2 px-4" style="margin-top:20px;" href="https://youtu.be/UV1VWwc9lN0?feature=shared">Play Content</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Doctor 4 -->
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{{ url_for('static', filename='img/Doc4.jpg') }}" class="img-fluid rounded-top w-100" alt="Dr. Susan Redline" style="height:300px">
+                        <div class="team-icon">
+                            <a class="btn btn-primary btn-sm-square rounded-pill mb-2" href="https://scholar.google.com/citations?user=xWLZ_wgAAAAJ&hl=en"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-title p-4">
+                        <h4 class="mb-0">Dr. Susan Redline</h4>
+                        <p class="mb-0">Sleep Epidemiologist</p>
+                        <p class="small">Dr. Redline's work addresses the links between sleep disorders and cardiovascular health. 
+                        <a class="btn btn-info rounded-pill py-2 px-4" style="margin-top:20px;" href="https://youtu.be/dLErQohnqoY?feature=shared">Play Content</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->     
+        
+<!-- Testimonial Start -->
+<div class="container-fluid testimonial pb-5" id="gg">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Video Section</h4>
+            <h1 class="display-4 mb-4">Understanding the Impact of Sleep on Cardiovascular Health</h1>
+            <p class="mb-0">Learn about the critical connection between sleep patterns and heart health. Discover how your chronotype and sleep habits can influence the risk of cardiovascular diseases. Watch our expert discussions to understand the importance of good sleep for a healthy heart.</p>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
+            <div class="testimonial-item bg-light rounded">
+                <div class="row g-0">
+                    <div class="col-4  col-lg-4 col-xl-3">
+                        <div class="cont">
+                            <iframe width="560" height="280" src="https://www.youtube.com/embed/gedoSfZvBgE?si=MkUvP9I2xk94Gti-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded">
+                <div class="row g-0">
+                    <div class="col-4  col-lg-4 col-xl-3">
+                        <div class="cont">
+                            <iframe width="560" height="280" src="https://www.youtube.com/embed/Y-8b99rGpkM?si=1oVSoAAJ5fUkT9z2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item bg-light rounded">
+                <div class="row g-0">
+                    <div class="col-4  col-lg-4 col-xl-3">
+                        <div class="cont">
+                            <iframe width="560" height="280" src="https://www.youtube.com/embed/IzQ2siryQrM?si=ScAraYCK4ox_Jx8W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-xl-9">
+                <div class="mb-5">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-6 col-xl-5">
+                            <div class="footer-item">
+                                <a href="index.html" class="p-0">
+                                    <h1 class="mb-0 text-white"><i class="fas fa-heartbeat me-2"></i>CardioSomnix</h1>
+                                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                                </a>
+                                <p class="text-white mb-4">Decode your chronotype, understand your sleep, tracking and take proactive steps toward preventing cardiovascular risks through data-driven insights</p>
+                                <div class="footer-btn d-flex">
+                                    <a class="btn btn-md-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-md-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-md-square rounded-circle me-3" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-md-square rounded-circle me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3">
+                            <div class="footer-item">
+                                <h4 class="text-white mb-4">Useful Links</h4>
+                                <a href="#aa"><i class="fas fa-angle-right me-2"></i> Facts</a>
+                                <a href="#bb"><i class="fas fa-angle-right me-2"></i> About</a>
+                                <a href="#cc"><i class="fas fa-angle-right me-2"></i> Chronotypes</a>
+                                <a href="#dd"><i class="fas fa-angle-right me-2"></i> FAQ's</a>
+                                <a href="#ee"><i class="fas fa-angle-right me-2"></i> Blogs</a>
+                                <a href="#"><i class="fas fa-angle-right me-2"></i> CareLocator</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-4">
+                            <div class="footer-item">
+                                <h4 class="mb-4 text-white">Gallery</h4>
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded">
+                                            <img src="{{ url_for('static', filename='img/pic1.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic1.png') }}" data-lightbox="footerInstagram-1" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded">
+                                            <img src="{{ url_for('static', filename='img/pic2.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic2.png') }}" data-lightbox="footerInstagram-2" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded" style="height:92px">
+                                            <img src="{{ url_for('static', filename='img/pic3.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic3.png') }}" data-lightbox="footerInstagram-3" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded">
+                                            <img src="{{ url_for('static', filename='img/pic4.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic4.png') }}" data-lightbox="footerInstagram-4" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded" style="height:92px">
+                                            <img src="{{ url_for('static', filename='img/pic5.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic5.png') }}" data-lightbox="footerInstagram-5" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded" style="height:92px">
+                                            <img src="{{ url_for('static', filename='img/pic6.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic6.png') }}" data-lightbox="footerInstagram-6" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-5" style="border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="row g-4">
+                                <div class="col-lg-6 col-xl-4">
+                                    <div class="d-flex">
+                                        <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white">Address</h4>
+                                            <p class="mb-0">Mumbai, India</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4">
+                                    <div class="d-flex">
+                                        <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                            <i class="fas fa-envelope fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white">Mail Us</h4>
+                                            <p class="mb-0">CardioSomnix@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4">
+                                    <div class="d-flex">
+                                        <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                            <i class="fa fa-phone-alt fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white">Telephone</h4>
+                                            <p class="mb-0">(+91) 93456 67890</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">Newsletter</h4>
+                    <p class="text-white mb-3">Poor sleep habits increase cardiovascular disease risk. Prioritize quality sleep to support heart health and overall well-being for a healthier life.</p>
+                    <div class="d-flex flex-shrink-0" style="margin-top:43px;">
+                        <div class="footer-btn">
+                            <a href="#" class="btn btn-lg-square rounded-circle position-relative wow tada" data-wow-delay=".9s">
+                                <i class="fa fa-phone-alt fa-2x"></i>
+                                <div class="position-absolute" style="top: 2px; right: 12px;">
+                                    <span><i class="fa fa-comment-dots text-secondary"></i></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="d-flex flex-column ms-3 flex-shrink-0">
+                            <span>Call to Our Experts</span>
+                            <a href="tel:+919345667890"><span class="text-white">Free: +91 93456 67890</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-12">
+                <div class="text-center py-2">
+                    <p class="mb-0">&copy; 2024 CardioSomnix. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Copyright End -->
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/lightbox/js/lightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+<!-- Template Javascript -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

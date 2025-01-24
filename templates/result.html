@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a0c4ff, #f0f9ff);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1s; /* Fade-in effect for the body */
+            color: #1b1b1b; /* Dark text for contrast */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #0056b3; /* Blue heading */
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-in-out; /* Slide-in effect for title */
+        }
+
+        .result {
+            margin-bottom: 20px;
+            background-color: #ffffff; /* White background for results */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.5s ease-in-out; /* Fade-in effect for results */
+        }
+
+        h2 {
+            color: #0056b3; /* Blue subheadings */
+            margin-bottom: 10px;
+            animation: slideIn 0.5s ease-in-out; /* Slide-in effect for subheadings */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #0056b3; /* Blue button */
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block; /* Make the link a block for padding */
+        }
+
+        a:hover {
+            background-color: #004494; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly increase size on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px; /* Slightly smaller font for mobile */
+            }
+
+            h2 {
+                font-size: 24px; /* Adjust subheading size for mobile */
+            }
+
+            .result {
+                padding: 15px; /* Adjust padding for mobile */
+            }
+
+            a {
+                padding: 8px 16px; /* Adjust padding for mobile button */
+                font-size: 16px; /* Adjust font size for mobile button */
+            }
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Results</h1>
+
+    <div class="result">
+        <p><strong>Prediction:</strong> {{ prediction }} (Risk of Cardiovascular Disease)</p>
+        <h2>Risk Percentages (In General)</h2>
+        <ul>
+            <li>Coronary Artery Disease (CAD): {{ risk_percentages.CAD | round(2) }}%</li>
+            <li>Hypertension: {{ risk_percentages.Hypertension | round(2) }}%</li>
+            <li>Sleep Apnea: {{ risk_percentages['Sleep Apnea'] | round(2) }}%</li>
+            <li>Peripheral Artery Disease: {{ risk_percentages['Peripheral Artery Disease'] | round(2) }}%</li>
+        </ul>
+    </div>
+
+    <div class="result">
+        <h2>Risk Distribution (Personalised)</h2>
+        <img src="{{ url_for('static', filename='images/chart.png') }}" alt="Risk Pie Chart" style="max-width: 100%; border-radius: 8px;">
+    </div>
+
+    <div class="result">
+        <h2>Recommended Actions</h2>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="result">
+        <h2>Your Sleep Chronotype: {{ chronotype }}</h2>
+        <p>{{ chronotype_info }}</p>
+    </div>
+
+    <div class="button">
+        <a href="{{ url_for('form') }}">Go back to the form</a>
+    </div>
+</body>
+</html>

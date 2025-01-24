@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioSomnix</title>
+    <meta content="Sleep quality and cardiovascular health are deeply interconnected. Learn how improving sleep can prevent heart diseases." name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/animate/animate.min.css') }}"/>
+    <link href="{{ url_for('static', filename='lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <style>
+        body{
+            font-family: "Ubuntu", sans-serif;
+        }
+        html{
+            scroll-behavior: smooth;
+            scroll-padding: 4.5rem;
+        }
+        .con body {
+            font-family: "Ubuntu", sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-right: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Replaced .container with section */
+        section {
+            display: flex;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .bmi-calculator {
+            padding: 40px;
+            background-color: #fff;
+            flex: 1;
+        }
+
+        .bmi-calculator h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .bmi-calculator p {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .slider-wrapper {
+            margin-bottom: 20px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 5px;
+            appearance: none;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #007bff;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .number-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .input-value {
+            font-size: 18px;
+            margin-left: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .calculate-btn {
+            background-color: #f7931e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .calculate-btn:hover {
+            background-color: #e68a19;
+        }
+
+        .bmi-result {
+            flex: 1;
+            background-color: #2d3e50;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .bmi-result h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .bmi-result .bmi-status {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .heart-attack-risk {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #f1c40f;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .status-bar div {
+            height: 10px;
+            flex: 1;
+            margin: 0 3px;
+            border-radius: 5px;
+        }
+
+        .underweight {
+            background-color: #f39c12;
+        }
+
+        .normal {
+            background-color: #27ae60;
+        }
+
+        .overweight {
+            background-color: #e67e22;
+        }
+
+        .obese {
+            background-color: #e74c3c;
+        }
+
+        .highlight {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 
+                        0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .highlight.underweight {
+            background-color: #f39c12;
+            box-shadow: 0 0 20px #f39c12, 
+                        0 0 30px #f39c12;
+        }
+
+        .highlight.normal {
+            background-color: #27ae60;
+            box-shadow: 0 0 20px #27ae60, 
+                        0 0 30px #27ae60;
+        }
+
+        .highlight.overweight {
+            background-color: #e67e22;
+            box-shadow: 0 0 20px #e67e22, 
+                        0 0 30px #e67e22;
+        }
+
+        .highlight.obese {
+            background-color: #e74c3c;
+            box-shadow: 0 0 20px #e74c3c, 
+                        0 0 30px #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                flex-direction: column;
+            }
+
+            .bmi-result {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+        <div class="container">
+            <div class="container-fluid topbar px-0 px-lg-4 bg-light py-2 d-none d-lg-block" style="margin-bottom: -10px;" >
+                <marquee width="100%" direction="left" behavior="scroll" scrollamount="4">
+                    <div>
+                        <a href="#" style="color: black; font-family:cursive">Unlock the hidden links between your sleep patterns and heart health with CARDIOSOMNIX, your guide to a healthier life......  Call to Our Experts: +91 93456 67890</a>
+                    </div>
+                </marquee>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="#" class="navbar-brand p-0">
+                    <h1 class="text-primary mb-0" style="margin-left: -50px;"><i class="fas fa-heartbeat me-2"></i>CardioSomnix</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: 30px;">
+                    <div class="navbar-nav mx-0 mx-lg-auto">
+                        <a href="{{ url_for('index') }}" class="nav-item nav-link active">Home</a>
+                        <a href="{{ url_for('index') }}" class="nav-item nav-link">Facts</a>
+                        <a href="{{ url_for('index') }}" class="nav-item nav-link">About</a>
+                        <a href="{{ url_for('index') }}" class="nav-item nav-link">Chronotypes</a>
+                        <a href="{{ url_for('index') }}" class="nav-item nav-link">CVD</a>
+                        <div class="nav-item dropdown">
+                            <a href="{{ url_for('index') }}" class="nav-link" data-bs-toggle="dropdown">
+                                <span class="dropdown-toggle">Pages</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="{{ url_for('index') }}" class="dropdown-item">FAQs</a>
+                                <a href="{{ url_for('index') }}" class="dropdown-item">Blog</a>
+                                <a href="{{ url_for('index') }}" class="dropdown-item">Our Experts</a>
+                                <a href="{{ url_for('index') }}" class="dropdown-item">Video Section</a>
+                            </div>
+                        </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">CareLocator</a>
+                    <div class="nav-btn px-3">
+                        <a href="{{ url_for('form') }}" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">Take A Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-xl-flex flex-shrink-0 ps-4">
+                <div class="nav-btn px-3">
+                    <a href="{{ url_for('bmi1') }}" class="btn btn-primary py-2 px-4 ms-3 flex-shrink-0" style="border-radius: 10px;">BMI Calculator</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar & Hero End -->
+
+    <!-- Map Section Starts -->
+    <div class="container-fluid testimonial pb-5">
+        <div class="container pb-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Understand Your Body Mass Index (BMI)</h4>
+                <h1 class="display-4 mb-4" style="font-size: 50px;">Calculate and Track Your Body Mass Index</h1>
+                <p class="mb-0">Discover how your weight and height contribute to your overall health by calculating your Body Mass Index (BMI). Maintaining a healthy BMI is crucial for preventing various health issues. Use the calculator below to assess your BMI and take steps toward a healthier lifestyle.</p>
+            </div>
+        </div>
+    </div>
+    <section class="con" style="margin-left: 350px; margin-top: -50px;" id="xx"> 
+        <div class="bmi-calculator">
+            <h1>BMI Calculator</h1>
+            <p>Check your Body Mass Index for a quick health assessment.</p>
+
+            <div class="slider-wrapper">
+                <label for="height">Your height in feet</label>
+                <input type="range" id="height" min="1" max="8" step="0.1" value="5" oninput="updateHeightValue(this.value)">
+                <div class="number-line">
+                    <span>1 ft</span>
+                    <span>8 ft</span>
+                </div>
+                <div>
+                    Height: <span id="heightValue" class="input-value">5</span> ft
+                </div>
+            </div>
+
+            <div class="slider-wrapper">
+                <label for="weight">Your weight in kilograms</label>
+                <input type="range" id="weight" min="5" max="200" step="1" value="52" oninput="updateWeightValue(this.value)">
+                <div class="number-line">
+                    <span>5 kg</span>
+                    <span>200 kg</span>
+                </div>
+                <div>
+                    Weight: <span id="weightValue" class="input-value">52</span> kg
+                </div>
+            </div>
+
+            <div>
+                <label for="age">Your age in years</label>
+                <input type="number" id="age" value="" min="1" max="100" placeholder="Enter your age (1-100)">
+            </div>
+
+            <button class="calculate-btn" onclick="calculateBMI()">Calculate</button>
+        </div>
+
+        <div class="bmi-result" id="bmiDisplay">
+            <div>
+                <h2 id="bmiResult" style="color: #f1c40f;">BMI will be shown here</h2>
+                <div class="bmi-status" id="bmiStatus">--</div>
+                <div class="heart-attack-risk" id="heartAttackRisk">Heart Related Risk: --</div>
+                
+                <div class="highlight" id="highlightBar"></div>
+
+                <div class="status-bar">
+                    <div class="underweight"></div>
+                    <div class="normal"></div>
+                    <div class="overweight"></div>
+                    <div class="obese"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function updateHeightValue(value) {
+            document.getElementById('heightValue').textContent = value;
+        }
+
+        function updateWeightValue(value) {
+            document.getElementById('weightValue').textContent = value;
+        }
+
+        function calculateBMI() {
+            const age = document.getElementById('age').value;
+            
+            if (!age) {
+                alert("Please enter your age.");
+                return;
+            }
+
+            if (age > 100) {
+                alert("Age cannot be greater than 100. Please enter a valid age.");
+                return;
+            }
+
+            const heightInFeet = document.getElementById('height').value;
+            const weightInKg = document.getElementById('weight').value;
+
+            const heightInMeters = heightInFeet * 0.3048;
+
+            const bmi = (weightInKg / (heightInMeters ** 2)).toFixed(1);
+
+            document.getElementById('bmiResult').textContent = `${bmi} kg/m2`;
+
+            const bmiStatus = document.getElementById('bmiStatus');
+            const heartAttackRisk = document.getElementById('heartAttackRisk');
+            const highlightBar = document.getElementById('highlightBar');
+
+            let riskMessage = '';
+            let highlightClass = '';
+
+            if (bmi < 18.5) {
+                bmiStatus.textContent = 'Underweight';
+                riskMessage = 'Heart Related Risk: Low';
+                highlightClass = 'underweight';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                bmiStatus.textContent = 'Normal';
+                riskMessage = 'Heart Related Risk: Low';
+                highlightClass = 'normal';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                bmiStatus.textContent = 'Overweight';
+                riskMessage = 'Heart Related Risk: Possible';
+                highlightClass = 'overweight';
+            } else {
+                bmiStatus.textContent = 'Obese';
+                riskMessage = 'Heart Related Risk: Higher';
+                highlightClass = 'obese';
+            }
+
+            heartAttackRisk.textContent = riskMessage;
+            highlightBar.className = `highlight ${highlightClass}`;
+            document.getElementById('bmiDisplay').style.visibility = 'visible';
+        }
+    </script><br><br><br>
+
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-xl-9">
+                <div class="mb-5">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-6 col-xl-5">
+                            <div class="footer-item">
+                                <a href="index.html" class="p-0">
+                                    <h1 class="mb-0 text-white"><i class="fas fa-heartbeat me-2"></i>CardioSomnix</h1>
+                                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                                </a>
+                                <p class="text-white mb-4">Decode your chronotype, understand your sleep, tracking and take proactive steps toward preventing cardiovascular risks through data-driven insights</p>
+                                <div class="footer-btn d-flex">
+                                    <a class="btn btn-md-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-md-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-md-square rounded-circle me-3" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-md-square rounded-circle me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3">
+                            <div class="footer-item">
+                                <h4 class="text-white mb-4">Useful Links</h4>
+                                <a href="#aa"><i class="fas fa-angle-right me-2"></i> Facts</a>
+                                <a href="#bb"><i class="fas fa-angle-right me-2"></i> About</a>
+                                <a href="#cc"><i class="fas fa-angle-right me-2"></i> Chronotypes</a>
+                                <a href="#dd"><i class="fas fa-angle-right me-2"></i> FAQ's</a>
+                                <a href="#ee"><i class="fas fa-angle-right me-2"></i> Blogs</a>
+                                <a href="#"><i class="fas fa-angle-right me-2"></i> CareLocator</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-4">
+                            <div class="footer-item">
+                                <h4 class="mb-4 text-white">Gallery</h4>
+                                <div class="row g-3">
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded">
+                                            <img src="{{ url_for('static', filename='img/pic1.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic1.png') }}" data-lightbox="footerInstagram-1" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded">
+                                            <img src="{{ url_for('static', filename='img/pic2.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic2.png') }}" data-lightbox="footerInstagram-2" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded" style="height:92px">
+                                            <img src="{{ url_for('static', filename='img/pic3.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic3.png') }}" data-lightbox="footerInstagram-3" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded">
+                                            <img src="{{ url_for('static', filename='img/pic4.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic4.png') }}" data-lightbox="footerInstagram-4" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded" style="height:92px">
+                                            <img src="{{ url_for('static', filename='img/pic5.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic5.png') }}" data-lightbox="footerInstagram-5" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="footer-instagram rounded" style="height:92px">
+                                            <img src="{{ url_for('static', filename='img/pic6.png') }}" class="img-fluid w-100" alt="">
+                                            <div class="footer-search-icon">
+                                                <a href="{{ url_for('static', filename='img/pic6.png') }}" data-lightbox="footerInstagram-6" class="my-auto"><i class="fas fa-link text-white"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-5" style="border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="row g-4">
+                                <div class="col-lg-6 col-xl-4">
+                                    <div class="d-flex">
+                                        <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white">Address</h4>
+                                            <p class="mb-0">Mumbai, India</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4">
+                                    <div class="d-flex">
+                                        <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                            <i class="fas fa-envelope fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white">Mail Us</h4>
+                                            <p class="mb-0">CardioSomnix@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-4">
+                                    <div class="d-flex">
+                                        <div class="btn-xl-square bg-primary text-white rounded p-4 me-4">
+                                            <i class="fa fa-phone-alt fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white">Telephone</h4>
+                                            <p class="mb-0">(+91) 93456 67890</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">Newsletter</h4>
+                    <p class="text-white mb-3">Poor sleep habits increase cardiovascular disease risk. Prioritize quality sleep to support heart health and overall well-being for a healthier life.</p>
+                    <div class="d-flex flex-shrink-0" style="margin-top:43px;">
+                        <div class="footer-btn">
+                            <a href="#" class="btn btn-lg-square rounded-circle position-relative wow tada" data-wow-delay=".9s">
+                                <i class="fa fa-phone-alt fa-2x"></i>
+                                <div class="position-absolute" style="top: 2px; right: 12px;">
+                                    <span><i class="fa fa-comment-dots text-secondary"></i></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="d-flex flex-column ms-3 flex-shrink-0">
+                            <span>Call to Our Experts</span>
+                            <a href="tel:+919345667890"><span class="text-white">Free: +91 93456 67890</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-12">
+                <div class="text-center py-2">
+                    <p class="mb-0">&copy; 2024 CardioSomnix. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Copyright End -->
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/lightbox/js/lightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+<!-- Template Javascript -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
